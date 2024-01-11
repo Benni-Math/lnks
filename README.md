@@ -4,29 +4,29 @@
 
 ![lnks demo](/demo/demo.gif)
 
-Check out [my blog post](https://www.hamvocke.com/blog/lnks-command-line-bookmarks/) for more details.
+All credit to [Ham Vocke](https://github.com/hamvocke), I just wrapped this in a Nix flake for portability. Check out [his blog post](https://www.hamvocke.com/blog/lnks-command-line-bookmarks/) and [his repository](https://github.com/hamvocke/lnks/tree/main) for more details.
 
 ## Setup
 
 Before you can get started, you've got to set up a few things once.
 
-### 1. Install `fzf` - the command line fuzzy finder
+### 1. Install via Nix
 
-`lnks` is just a small script around `fzf`. Install it by following the [installation instructions](https://github.com/junegunn/fzf#installation) or simply by installing it from your package manager of choice:
+Install Nix and enable flakes, then simply run
 
-```bash
-sudo apt install fzf # Ubuntu
-brew install fzf # Mac OS
-sudo pacman -S fzf # Arch
-choco install fzf # Windows
+```sh
+nix profile install Benni-Math/lnks
 ```
 
-### 2. Grab a copy of this repository
+### 2. Add your bookmarks
 
-`git clone` this repo, fork it, or simply download the `lnks.sh` and `bookmarks.txt` files to your directory of choice. You can also grab one of [the releases](https://github.com/hamvocke/lnks/releases) if you favor some more stability.
+You can open a specific bookmark file via the `open` subcommand:
 
+```
+lnks open bookmarks.txt
+```
 
-### 3. Add your bookmarks
+By default, these files will be storied (and queried from) `~/.bookmarks/`, but you can change this directory by setting the `$BOOKMARK_DIR` environment variable.
 
 Following the pattern in `bookmarks.txt` add all your bookmarks into one (or many) `.txt` files next to `lnks.sh`.
 
@@ -44,29 +44,11 @@ The rules:
 * Each line consists of a searchable name and a URL
 * The URL goes last and is separated from the searchable name with a `space`
 * The file needs to have the `.txt` extension
-* You can have as many `.txt` files next to `lnks.sh` as you want
-
-
-### _Optional_: Create a global alias for easy access
-
-Add this alias to your config so you can type `lnks` from any directory to open your bookmarks:
-
-
-```bash
-# add this to e.g. your .bashrc or .zshrc
-
-alias lnks='~/your-lnks-dir/lnks.sh'
-```
-
-```powershell
-# add to $profile - check location with `Write-Output $profile`
-
-New-Alias lnks "$Home\your-lnks-dir\lnks.ps1"
-```
+* You can have as many `.txt` files in your `$BOOKMAR_DIR` as you want
 
 ## Usage
 
-1. Run `lnks.sh` (Linux, Mac, WSL) or `lnks.ps1` (Windows)
+1. Run `lnks`
 2. Type to run a fuzzy search against the names of your bookmarks
 3. Use arrow keys to navigate up and down
 4. Hit `Enter` to open a bookmark in your browser
@@ -82,4 +64,4 @@ Usage: lnks.sh [OPTIONS...]
 
 `lnks` works well for software development teams. Use it to share a well-known list of bookmarks to your production and staging systems, your build pipelines, your bug tracker, important observability dashboards or whatever else might be relevant for your day to day work.
 
-Fork this repo, add all your team's important URLs to a text file and share the git repo with your team. Team members can add, update and remove bookmarks and check them back in to your shared repository to ensure that everyone's got up to date bookmarks to important URLs and systems.
+Fork this repo, set the `$BOOKMARK_DIR` environment variable to its location locally, add all your team's important URLs to a text file, and share the git repo with your team. Team members can add, update and remove bookmarks and check them back in to your shared repository to ensure that everyone's got up to date bookmarks to important URLs and systems.
