@@ -15,7 +15,7 @@ Before you can get started, you've got to set up a few things once.
 Install Nix and enable flakes, then simply run
 
 ```sh
-nix profile install Benni-Math/lnks
+nix profile install github:Benni-Math/lnks
 ```
 
 ### 2. Add your bookmarks
@@ -23,12 +23,18 @@ nix profile install Benni-Math/lnks
 You can open a specific bookmark file via the `open` subcommand:
 
 ```
-lnks open bookmarks.txt
+lnks --edit bookmarks.txt
 ```
 
-By default, these files will be storied (and queried from) `~/.bookmarks/`, but you can change this directory by setting the `$BOOKMARK_DIR` environment variable.
+you can also omit the `.txt` extension:
 
-Following the pattern in `bookmarks.txt` add all your bookmarks into one (or many) `.txt` files next to `lnks.sh`.
+```
+lnks --edit bookmarks
+```
+
+By default, these files will be storied (and queried from) `~/.bookmarks/`, but you can change this directory by using the `--dir` flag.
+
+Following the pattern in `bookmarks.txt` add all your bookmarks into one (or many) `.txt` files in your bookmarks directory.
 
 Like this:
 
@@ -44,7 +50,7 @@ The rules:
 * Each line consists of a searchable name and a URL
 * The URL goes last and is separated from the searchable name with a `space`
 * The file needs to have the `.txt` extension
-* You can have as many `.txt` files in your `$BOOKMAR_DIR` as you want
+* You can have as many `.txt` files in your bookmarks directory as you want
 
 ## Usage
 
@@ -56,12 +62,13 @@ The rules:
 
 ```
 Usage: lnks.sh [OPTIONS...]
-  -k        --keep-open     Keep lnks open after selecting a bookmark
-  -d <dir>  --dir <dir>     Specify a directory where bookmarks files are stored
+  -k         --keep-open     Keep lnks open after selecting a bookmark
+  -d <dir>   --dir <dir>     Specify a directory where bookmarks files are stored
+  -e <file>  --edit <file>   Edit the specified bookmarks file (with vim)
 ```
 
 ## Working with a team
 
 `lnks` works well for software development teams. Use it to share a well-known list of bookmarks to your production and staging systems, your build pipelines, your bug tracker, important observability dashboards or whatever else might be relevant for your day to day work.
 
-Fork this repo, set the `$BOOKMARK_DIR` environment variable to its location locally, add all your team's important URLs to a text file, and share the git repo with your team. Team members can add, update and remove bookmarks and check them back in to your shared repository to ensure that everyone's got up to date bookmarks to important URLs and systems.
+Add all your team's important URLs to a text file, and share as a git repo with your team. Team members can add, update and remove bookmarks and check them back in to your shared repository to ensure that everyone's got up to date bookmarks to important URLs and systems.
